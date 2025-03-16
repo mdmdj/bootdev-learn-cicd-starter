@@ -35,7 +35,7 @@ func TestGetAPIKey(t *testing.T) {
 	_, err = GetAPIKey(header)
 	wanterr := errors.New("malformed authorization header")
 
-	if !reflect.DeepEqual(wanterr, err) {
+	if errors.Is(wanterr, err) {
 		t.Fatalf("expected: %v, got: %v", wanterr, err)
 	}
 
