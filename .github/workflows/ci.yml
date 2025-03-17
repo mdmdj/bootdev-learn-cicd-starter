@@ -21,8 +21,9 @@ jobs:
       - name: Run go fmt
         run: test -z $(go fmt ./...)
   
-      - name: Exit
-        run: (exit $?)
+      - uses: dominikh/staticcheck-action@v1
+        with:
+          version: "latest"
 
   tests:
     name: Tests
@@ -39,6 +40,12 @@ jobs:
 
       - name: Run Tests
         run: go test ./... -cover
-  
+
+      - name: Install gosec
+        run: go install github.com/securego/gosec/v2/cmd/gosec@latest
+
+      - name: Run gosec
+        run: gosec ./...
+
       - name: Exit Happy
         run: (exit 0)
