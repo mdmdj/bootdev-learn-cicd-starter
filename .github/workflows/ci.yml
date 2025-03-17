@@ -21,8 +21,9 @@ jobs:
       - name: Run go fmt
         run: test -z $(go fmt ./...)
   
-      - name: Exit
-        run: (exit $?)
+      - uses: dominikh/staticcheck-action@v1
+        with:
+          version: "latest"
 
   tests:
     name: Tests
